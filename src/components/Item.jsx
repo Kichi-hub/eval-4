@@ -4,8 +4,8 @@ function Item({ item, deleteItem, editItem }) {
     return (
         <li>
             {item.value}
-            <button onClick={() => editItem(item)}>Editar</button>
-            <button onClick={() => deleteItem(item.id)}>Eliminar</button>
+            <button className="edit-btn" onClick={() => editItem(item)}>Editar</button>
+            <button className="delete-btn" onClick={() => deleteItem(item.id)}>Eliminar</button>
         </li>
     );
 }

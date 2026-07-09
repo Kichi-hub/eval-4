@@ -12,6 +12,7 @@
     --color-grisaceo: #edefed; /* Color naranjo */
     --color-rojo: #b63838;
     --color-verde-gris: #87d7d9;
+    --color-verde: #72db72;
 
     /* Hover */
     --color-rosa-hover: #d86c7d;
@@ -114,6 +115,26 @@ form button.update-btn {
 
 form button.update-btn:hover {
   background-color: var(--color-grisaceo-hover);
+  transform: translateY(-2px);
+}
+
+button.edit-btn {
+  background-color: var(--color-verde-gris);
+  color: var(--color-blanco);
+}
+
+button.edit-btn:hover {
+  background-color: var(--color-verde-hover);
+  transform: translateY(-2px);
+}
+
+button.delete-btn {
+  background-color: var(--color-rojo);
+  color: var(--color-blanco);
+}
+
+button.delete-btn:hover {
+  background-color: var(--color-rojo-hover);
   transform: translateY(-2px);
 }
 
