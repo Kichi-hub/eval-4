@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+:root{
+    --color-fondo-claro: #95e0e7;
+    --color-suave: #c5efed;
+    --color-principal: #4cc3dc;
+    --color-malva: #a36b76;
+    --color-aqua: #20abd8;
+    --color-texto-secundario: #7d5560;
+    --color-blanco: #ffffff;
+    --color-azul: #2f6f9f;
+    --color-grisaceo: #edefed; /* Color naranjo */
+    --color-rojo: #b63838;
+    --color-verde-gris: #87d7d9;
+
+    /* Hover */
+    --color-rosa-hover: #d86c7d;
+    --color-aqua-hover: #1f9ca8; /*color verde hover */
+    --color-rojo-hover: #8f2c2c;
+    --color-azul-hover: #1f5a7a;
+    --color-grisaceo-hover: #edefed; /* Color naranjo hover */
+
+    /* Bordes y sombras */
+    --color-borde: #cdbfc3;
+    --color-sombra: rgba(0, 0, 0, 0.15);
+    --color-sombra-item: rgba(0, 0, 0, 0.08);
+    --color-focus: rgba(239, 124, 142, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    var(--color-aqua),
+    var(--color-blanco),
+    var(--color-principal)
+  );
+  padding: 20px;
+}
+
+.App {
+  background-color: var(--color-blanco);
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px var(--color-sombra);
+  text-align: center;
+  max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: "Lilita One", sans-serif;
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: var(--color-principal);
+  font-size: 30px;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 2px solid var(--color-borde);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: var(--color-principal);
+  box-shadow: 0 0 0 3px var(--color-focus);
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+form button {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+
+form button:hover {
+  background-color: var(--color-aqua-hover);
+  transform: translateY(-2px);
+}
+
+form button.update-btn {
+  background-color: var(--color-grisaceo);
+  color: var(--color-blanco);
+}
+
+form button.update-btn:hover {
+  background-color: var(--color-grisaceo-hover);
+  transform: translateY(-2px);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: var(--color-suave);
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--color-verde-gris);
+  font-size: 16px;
+  box-shadow: 0 4px 10px var(--color-sombra-item);
+}
+
+/* Texto del ítem */
+li span {
+  flex: 1;
+  text-align: left;
+  word-break: break-word;
+}
+
+li .button-group {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+li button {
+  border: none;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  min-width: 75px;
+}
+
+li .complete-btn {
+  background-color: var(--color-azul);
+  color: var(--color-blanco);
+}
+
+li .complete-btn:hover {
+  background-color: var(--color-azul-hover);
+  transform: translateY(-2px);
+}
+
+li .edit-btn {
+  background-color: var(--color-verde-gris);
+  color: var(--color-blanco);
+}
+
+li .edit-btn:hover {
+  background-color: var(--color-aqua-hover);
+  transform: translateY(-2px);
+}
+
+li .delete-btn {
+  background-color: var(--color-rojo);
+  color: var(--color-blanco);
+}
+
+li .delete-btn:hover {
+  background-color: var(--color-rojo-hover);
+  transform: translateY(-2px);
+}
+
+.delete-all-btn {
+  background-color: var(--color-rojo) !important;
+  color: var(--color-blanco) !important;
+  margin-bottom: 15px;
+  padding: 8px 16px !important;
+}
+
+.delete-all-btn:hover {
+  background-color: var(--color-rojo-hover) !important;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 25px 18px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  li .button-group {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  li button {
+    width: 100%;
+  }
+}
