@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Form ({addOrUpdateItem, itemToEdit}) {
+function Form({ addOrUpdateItem, itemToEdit }) {
     const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
@@ -10,19 +10,24 @@ function Form ({addOrUpdateItem, itemToEdit}) {
             setInputValue('');
         }
     }, [itemToEdit]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputValue.trim() === '') return; // Evita agregar tareas vacías
+        if (inputValue.trim() === '') {
+            alert('No se permiten elementos vacíos o con solo espacios.'); // ← aviso al usuario
+            return;
+        }
         addOrUpdateItem(inputValue);
-        setInputValue(''); // Limpia el input después de agregar o actualizar
-    }
+        setInputValue('');
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Enter a new item..."
+                placeholder="Ingresa un nuevo elemento..."
             />
             <button type="submit">Agrega o Actualiza Item</button>
         </form>

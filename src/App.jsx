@@ -4,47 +4,44 @@ import List from './components/List';
 import './App.css';
 
 function App() {
-  // Solución óptima: Cargamos de localStorage directamente al inicializar el estado
-  const [items, setItems] = useState(() => {
-    const storedItems = localStorage.getItem('items');
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
-  
-  const [itemToEdit, setItemToEdit] = useState(null);
+    const [items, setItems] = useState(() => {
+        const storedItems = localStorage.getItem('items');
+        return storedItems ? JSON.parse(storedItems) : [];
+    });
 
-  // Sincroniza con localStorage cada vez que cambien los items
-  useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(items));
-  }, [items]);
+    const [itemToEdit, setItemToEdit] = useState(null);
 
-  const addOrUpdateItem = (value) => {
-    if (itemToEdit) {
-      // Update existing item
-      setItems(items.map(item => item.id === itemToEdit.id ? { ...item, value } : item));
-      setItemToEdit(null);
-    } else {
-      // Add new item
-      const newItem = { id: Date.now(), value };
-      setItems([...items, newItem]);
-    }
-  };
+    useEffect(() => {
+        localStorage.setItem('items', JSON.stringify(items));
+    }, [items]);
 
-  const deleteItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  };
+    const addOrUpdateItem = (value) => {
+        if (itemToEdit) {
+            setItems(items.map(item => item.id === itemToEdit.id ? { ...item, value } : item));
+            setItemToEdit(null);
+        } else {
+            const newItem = { id: Date.now(), value };
+            setItems([...items, newItem]);
+        }
+    };
 
-  const editItem = (item) => {
-    setItemToEdit(item);
-  };
+    const deleteItem = (id) => {
+        setItems(items.filter(item => item.id !== id));
+    };
 
-  // El return ahora pertenece legítimamente al componente App
-  return (
-    <div className="App">
-      <h1>CRUD con LocalStorage</h1>
-      <Form addOrUpdateItem={addOrUpdateItem} itemToEdit={itemToEdit} />
-      <List items={items} deleteItem={deleteItem} editItem={editItem} />
-    </div>
-  );
+    const editItem = (item) => {
+        setItemToEdit(item);
+    };
+
+    return (
+        <div className="App">
+            <h1>CRUD con LocalStorage</h1>
+            <Form addOrUpdateItem={addOrUpdateItem} itemToEdit={itemToEdit} />
+            {/* Contador de elementos */}
+            <p>Total de elementos: {items.length}</p>
+            <List items={items} deleteItem={deleteItem} editItem={editItem} />
+        </div>
+    );
 }
 
 export default App;
