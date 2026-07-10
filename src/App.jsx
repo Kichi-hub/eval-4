@@ -10,6 +10,7 @@ function App() {
     });
 
     const [itemToEdit, setItemToEdit] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items));
@@ -20,7 +21,7 @@ function App() {
             setItems(items.map(item => item.id === itemToEdit.id ? { ...item, value } : item));
             setItemToEdit(null);
         } else {
-            const newItem = { id: Date.now(), value };
+            const newItem = { id: Date.now(), value, completed: false };
             setItems([...items, newItem]);
         }
     };
@@ -33,13 +34,41 @@ function App() {
         setItemToEdit(item);
     };
 
+    const toggleComplete = (id) => {
+        setItems(prevItems =>
+            prevItems.map(item =>
+                item.id === id ? { ...item, completed: !item.completed } : item
+            )
+        );
+    };
+
+    const deleteAll = () => {
+        if (items.length === 0) return;
+        if (window.confirm('¿Estás seguro de que deseas eliminar TODOS los elementos?')) {
+            setItems([]);
+        }
+    };
+
+    const filteredItems = items.filter(item =>
+        item.value.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="App">
             <h1>CRUD con LocalStorage</h1>
             <Form addOrUpdateItem={addOrUpdateItem} itemToEdit={itemToEdit} />
             {/* Contador de elementos */}
             <p>Total de elementos: {items.length}</p>
-            <List items={items} deleteItem={deleteItem} editItem={editItem} />
+            <input
+                type="text"
+                placeholder="Buscar elementos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className="delete-all-btn" onClick={deleteAll}>
+                Borrar todo
+            </button>
+            <List items={filteredItems} deleteItem={deleteItem} editItem={editItem} toggleComplete={toggleComplete} />
         </div>
     );
 }
